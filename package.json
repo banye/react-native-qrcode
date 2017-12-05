@@ -1,0 +1,21 @@
+
+{
+  "name": "@wisqo/react-native-qrcode",
+  "version": "0.0.1",
+  "description": "React Native QrCode scanner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "QrCode",
+    "scanner"
+  ],
+  "author": "WisQo Smart <info@wisqo.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": "^0.41.2",
+    "react-native-windows": "0.41.0-rc.1"
+  }
+}
