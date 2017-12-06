@@ -1,6 +1,11 @@
 
-import { NativeModules } from 'react-native';
+import { requireNativeComponent, View } from 'react-native';
 
-const { RNQrcode } = NativeModules;
+const iface = {
+  name: 'QrCodeScanner',
+  propTypes: {
+    ...View.propTypes,
+  },
+};
 
-export default RNQrcode;
+module.exports = requireNativeComponent('RCTQrCodeScanner', iface);

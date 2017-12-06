@@ -1,22 +1,20 @@
 
-package com.reactlibrary;
+package com.wisqo.opensource.qrcode;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
-public class RNQrcodeModule extends ReactContextBaseJavaModule {
+public class RCTQrCodeModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
 
-  public RNQrcodeModule(ReactApplicationContext reactContext) {
+  public RCTQrCodeModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
   }
 
   @Override
   public String getName() {
-    return "RNQrcode";
+    return "RCTQrCode";
   }
 }
