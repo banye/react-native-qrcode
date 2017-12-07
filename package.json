@@ -1,4 +1,3 @@
-
 {
   "name": "@wisqo/react-native-qrcode",
   "version": "0.0.1",
@@ -17,5 +16,9 @@
   "peerDependencies": {
     "react-native": "^0.41.2",
     "react-native-windows": "0.41.0-rc.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0"
   }
 }

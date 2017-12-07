@@ -9,9 +9,16 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
+
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import cn.bingoogolapple.qrcode.core.CameraPreview;
 import cn.bingoogolapple.qrcode.core.ProcessDataTask;
+
+import static java.security.AccessController.getContext;
 
 public abstract class QrCodeView extends RelativeLayout
     implements Camera.PreviewCallback, ProcessDataTask.Delegate {
@@ -23,6 +30,7 @@ public abstract class QrCodeView extends RelativeLayout
   protected boolean mSpotAble = false;
   protected ProcessDataTask mProcessDataTask;
   private int mOrientation;
+  private int startupDelay = 1500;
 
   public QrCodeView(Context context, AttributeSet attrs) {
     super(context);
@@ -60,6 +68,8 @@ public abstract class QrCodeView extends RelativeLayout
 //        RelativeLayout.LayoutParams.MATCH_PARENT)
 //    );
     startSpotAndShowRect();
+
+    this.setDelegate(new EventHandler());
   }
 
   /**
@@ -150,7 +160,7 @@ public abstract class QrCodeView extends RelativeLayout
    * 延迟100m秒后开始识别
    */
   public void startSpot() {
-    startSpotDelay(1500);
+    startSpotDelay(startupDelay);
   }
 
   /**
@@ -313,5 +323,36 @@ public abstract class QrCodeView extends RelativeLayout
      * 处理打开相机出错
      */
     void onScanQRCodeOpenCameraError();
+  }
+
+  public void setStartupDelay(int delay) {
+    this.startupDelay = delay;
+  }
+
+  private class EventHandler implements QrCodeView.Delegate {
+    @Override
+    public void onScanQRCodeSuccess(String result) {
+      WritableMap event = Arguments.createMap();
+      event.putString("result", result);
+      ReactContext reactContext = (ReactContext)getContext();
+      reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+          getId(),
+          "success",
+          event);
+
+      System.out.println("System now received message:" + result);
+    }
+
+    @Override
+    public void onScanQRCodeOpenCameraError() {
+      WritableMap event = Arguments.createMap();
+      event.putString("error", "Failed to open camera");
+      ReactContext reactContext = (ReactContext)getContext();
+      reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+          getId(),
+          "error",
+          event);
+    }
+
   }
 }

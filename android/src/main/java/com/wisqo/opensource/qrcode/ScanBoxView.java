@@ -207,9 +207,12 @@ public class ScanBoxView extends View {
     } else if (attr == QRCodeView_qrcv_scanLineMargin) {
       mScanLineMargin = getDimensionPixelSize(attr, mScanLineMargin);
     } else if (attr == QRCodeView_qrcv_isShowDefaultScanLineDrawable) {
-      mIsShowDefaultScanLineDrawable = typedArray.getBoolean(attr, mIsShowDefaultScanLineDrawable);
+      // TODO: Support for custom drawable in the future.
+      // mIsShowDefaultScanLineDrawable =
+      // typedArray.getBoolean(attr, mIsShowDefaultScanLineDrawable);
     } else if (attr == QRCodeView_qrcv_customScanLineDrawable) {
-      mCustomScanLineDrawable = typedArray.getDrawable(attr);
+      // TODO: Support for custom drawable in the future.
+      // mCustomScanLineDrawable = typedArray.getDrawable(attr);
     } else if (attr == QRCodeView_qrcv_borderSize) {
       mBorderSize = getDimensionPixelSize(attr, mBorderSize);
     } else if (attr == QRCodeView_qrcv_borderColor) {
