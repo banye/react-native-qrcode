@@ -45,19 +45,37 @@ static SGQRCodeScanManager *_instance;
 }
 
 - (void)setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController {
+    if (currentController == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode"
+                                                    reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 currentController 参数不能为空"
+                                                  userInfo:nil];
+        [excp raise];
+    }
+    
+    return [self setupSessionPreset:sessionPreset metadataObjectTypes:metadataObjectTypes targetView:currentController.view];
+}
+
+
+- (void)setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes targetView:(UIView *)targetView {
     
     if (sessionPreset == nil) {
-        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 sessionPreset 参数不能为空" userInfo:nil];
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode"
+                                                    reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 sessionPreset 参数不能为空"
+                                                  userInfo:nil];
         [excp raise];
     }
     
     if (metadataObjectTypes == nil) {
-        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 metadataObjectTypes 参数不能为空" userInfo:nil];
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode"
+                                                    reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 metadataObjectTypes 参数不能为空"
+                                                  userInfo:nil];
         [excp raise];
     }
     
-    if (currentController == nil) {
-        NSException *excp = [NSException exceptionWithName:@"SGQRCode" reason:@"setupSessionPreset:metadataObjectTypes:currentController: 方法中的 currentController 参数不能为空" userInfo:nil];
+    if (targetView == nil) {
+        NSException *excp = [NSException exceptionWithName:@"SGQRCode"
+                                                    reason:@"setupSessionPreset:metadataObjectTypes:targetView: 方法中的 targetView 参数不能为空"
+                                                  userInfo:nil];
         [excp raise];
     }
 
@@ -106,7 +124,7 @@ static SGQRCodeScanManager *_instance;
     CGFloat w = [UIScreen mainScreen].bounds.size.width;
     CGFloat h = [UIScreen mainScreen].bounds.size.height;
     _videoPreviewLayer.frame = CGRectMake(x, y, w, h);
-    [currentController.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
+    [targetView.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     // 9、启动会话
     [_session startRunning];

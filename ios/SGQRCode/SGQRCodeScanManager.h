@@ -39,6 +39,8 @@
  *  @param currentController      SGQRCodeScanManager 所在控制器
  */
 - (void)setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes currentController:(UIViewController *)currentController;
+
+- (void)setupSessionPreset:(NSString *)sessionPreset metadataObjectTypes:(NSArray *)metadataObjectTypes targetView:(UIView *) view;
 /** 开启会话对象扫描 */
 - (void)startRunning;
 /** 停止会话对象扫描 */
