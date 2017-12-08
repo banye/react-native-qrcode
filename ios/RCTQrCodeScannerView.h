@@ -5,6 +5,8 @@
 #import <React/RCTBridge.h>
 
 #import "RCTQrCodeScanner.h"
+#import "SGQRCodeScanManager.h"
+#import "SGQRCodeAlbumManager.h"
 
 //@interface RCTQrCodeScanner : NSObject <RCTBridgeModule>
 //
@@ -12,6 +14,11 @@
 
 @interface RCTQrCodeScannerView: UIView
 
-- (id)initWithManager:(RCTQrCodeScanner *)manager bridge:(RCTBridge *)bridge;
+- (id)initWithManager:(RCTQrCodeScanner *)manager
+               bridge:(RCTBridge *)bridge;
+
+@property (nonatomic, strong) id<SGQRCodeScanManagerDelegate> delegate;
+@property (nonatomic, copy) RCTBubblingEventBlock onSuccess;
+@property (nonatomic, copy) RCTBubblingEventBlock onScanError;
 
 @end

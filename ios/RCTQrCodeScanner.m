@@ -3,6 +3,12 @@
 #import "RCTQrCodeScannerView.h"
 #import <React/UIView+React.h>
 
+#import "SGQRCodeScanManager.h"
+#import "SGQRCodeAlbumManager.h"
+
+@interface RCTQrCodeScannerView()
+@end
+
 @implementation RCTQrCodeScanner
 
 //- (dispatch_queue_t)methodQueue
@@ -12,6 +18,8 @@
 //RCT_EXPORT_MODULE()
 
 RCT_EXPORT_MODULE()
+RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTBubblingEventBlock)
+// RCT_EXPORT_VIEW_PROPERTY(onError, RCTBubblingEventBlock)
 
 - (UIView *)view
 {

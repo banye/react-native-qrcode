@@ -94,7 +94,7 @@ export default class QrCodeScanner extends Component {
     return <RCTQrCodeScanner
       {...nativeProps}
       onSuccess={this._onSuccess}
-      onError={this._onError}
+      onScanError={this._onError}
     />;
   }
 }

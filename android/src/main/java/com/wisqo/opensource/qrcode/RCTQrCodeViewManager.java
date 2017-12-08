@@ -38,7 +38,7 @@ public class RCTQrCodeViewManager extends ViewGroupManager<QrCodeView> {
             "error",
             MapBuilder.of(
                 "phasedRegistrationNames",
-                MapBuilder.of("bubbled", "onError")))
+                MapBuilder.of("bubbled", "onScanError")))
         .build();
   }
 

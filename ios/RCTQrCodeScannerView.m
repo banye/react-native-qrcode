@@ -1,8 +1,6 @@
 
 #import "RCTQrCodeScannerView.h"
 #import "SGQRCodeScanningView.h"
-#import "SGQRCodeScanManager.h"
-#import "SGQRCodeAlbumManager.h"
 
 
 @interface RCTQrCodeScannerView () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
@@ -14,11 +12,13 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) RCTBridge *bridge;
 @property (nonatomic, strong) RCTQrCodeScanner *viewManager;
+
 @end
 
 @implementation RCTQrCodeScannerView
 
-- (id)initWithManager:(RCTQrCodeScanner *)manager bridge:(RCTBridge *)bridge
+- (id)initWithManager:(RCTQrCodeScanner *)manager
+               bridge:(RCTBridge *)bridge
 {
     if ((self = [super init])) {
         self.viewManager = manager;
@@ -29,7 +29,6 @@
 
 - (SGQRCodeScanningView *)scanningView: (CGRect)frame{
     if (!_scanningView) {
-
         _scanningView = [[SGQRCodeScanningView alloc] initWithFrame:frame];
         _scanningView.borderColor = [UIColor whiteColor];
         _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
@@ -72,7 +71,8 @@
 
 #pragma mark - - - SGQRCodeAlbumManagerDelegate
 - (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager {
-     [self addSubview:self.scanningView];
+    NSLog(@"Picking albums qrcode.");
+    // [self addSubview:self.scanningView];
 }
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result {
     NSLog(@"Jump to result: %@", result);
@@ -81,13 +81,20 @@
 #pragma mark - - - SGQRCodeScanManagerDelegate
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     NSLog(@"metadataObjects - - %@", metadataObjects);
-//    if (metadataObjects != nil && metadataObjects.count > 0) {
-//        [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
-//        [scanManager stopRunning];
-//        [scanManager videoPreviewLayerRemoveFromSuperlayer];
-//    } else {
-//        NSLog(@"暂未识别出扫描的二维码");
-//    }
+    if (metadataObjects != nil && metadataObjects.count > 0) {
+        // [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
+        [scanManager stopRunning];
+        [scanManager videoPreviewLayerRemoveFromSuperlayer];
+        
+        AVMetadataMachineReadableCodeObject *meta = metadataObjects[0];
+        NSLog(@"Scan value: %@", meta.stringValue);
+        self.onSuccess(@{ @"result": meta.stringValue });
+    } else {
+        // NSLog(@"暂未识别出扫描的二维码");
+        // onError is preserved 
+        self.onScanError(@{ @"error": @"Could not recognize the QrCode scanned" });
+    }
 }
+
 @end
   
