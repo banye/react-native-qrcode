@@ -1,6 +1,7 @@
 
 #import "RCTQrCodeScanner.h"
 #import "RCTQrCodeScannerView.h"
+#import <React/UIView+React.h>
 
 @implementation RCTQrCodeScanner
 
@@ -14,9 +15,9 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    
     // return [[MKMapView alloc] init];
-    RCTQrCodeScannerView *scanView = [[RCTQrCodeScannerView alloc] initWithManager:self bridge:self.bridge];
+    RCTQrCodeScannerView *scanView = [[RCTQrCodeScannerView alloc] initWithManager:self
+                                                                            bridge:self.bridge];
     return (UIView *)scanView;
 }
 

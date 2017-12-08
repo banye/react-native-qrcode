@@ -14,7 +14,6 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) RCTBridge *bridge;
 @property (nonatomic, strong) RCTQrCodeScanner *viewManager;
-
 @end
 
 @implementation RCTQrCodeScannerView
@@ -24,18 +23,14 @@
     if ((self = [super init])) {
         self.viewManager = manager;
         self.bridge = bridge;
-        self.scanningView = [self scanningView];
-        [self addSubview:self.scanningView];
-        [self setupQRCodeScanning];
     }
     return self;
 }
 
-- (SGQRCodeScanningView *)scanningView {
+- (SGQRCodeScanningView *)scanningView: (CGRect)frame{
     if (!_scanningView) {
-        NSLog(@"Width: %d, %d", 100, 100);
-        _scanningView = [[SGQRCodeScanningView alloc]
-                         initWithFrame:CGRectMake(0, 0, 300, 0.9 * 300)];
+
+        _scanningView = [[SGQRCodeScanningView alloc] initWithFrame:frame];
         _scanningView.borderColor = [UIColor whiteColor];
         _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
         _scanningView.scanningAnimationStyle = ScanningAnimationStyleGrid;
@@ -43,6 +38,22 @@
     }
     return _scanningView;
 }
+
+- (void)reactSetFrame:(CGRect)frame
+{
+    // Do something with the height here
+    [super reactSetFrame: frame];
+    NSLog(@"reactSetFrame Width & Height: %f, %f", frame.size.width, frame.size.height);
+    self.scanningView = [self scanningView:frame];
+    [self addSubview:self.scanningView];
+    [self setupQRCodeScanning];
+}
+
+- (void)reactSetInheritedBackgroundColor:(UIColor *)inheritedBackgroundColor
+{
+    self.backgroundColor = inheritedBackgroundColor;
+}
+
 
 - (void)removeScanningView {
     [self.scanningView removeTimer];
@@ -70,13 +81,13 @@
 #pragma mark - - - SGQRCodeScanManagerDelegate
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     NSLog(@"metadataObjects - - %@", metadataObjects);
-    if (metadataObjects != nil && metadataObjects.count > 0) {
-        [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
-        [scanManager stopRunning];
-        [scanManager videoPreviewLayerRemoveFromSuperlayer];
-    } else {
-        NSLog(@"暂未识别出扫描的二维码");
-    }
+//    if (metadataObjects != nil && metadataObjects.count > 0) {
+//        [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
+//        [scanManager stopRunning];
+//        [scanManager videoPreviewLayerRemoveFromSuperlayer];
+//    } else {
+//        NSLog(@"暂未识别出扫描的二维码");
+//    }
 }
 @end
   

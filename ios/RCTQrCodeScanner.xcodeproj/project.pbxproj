@@ -14,7 +14,7 @@
 		CB228BE31FD98B3700947E1F /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB228BDA1FD98B3600947E1F /* SGQRCodeGenerateManager.m */; };
 		CB228BE41FD98B3700947E1F /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CB228BDB1FD98B3600947E1F /* SGQRCodeHelperTool.m */; };
 		CB228BE71FD98B6A00947E1F /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CB228BE61FD98B6A00947E1F /* UIImage+ImageSize.m */; };
-		CB228BEA1FD994D700947E1F /* RCTQrCodeScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB228BE91FD994D700947E1F /* RCTQrCodeScannerView.m */; };
+		CB228BEC1FDA427000947E1F /* RCTQrCodeScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB228BEB1FDA427000947E1F /* RCTQrCodeScannerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,7 +48,7 @@
 		CB228BE51FD98B6900947E1F /* UIImage+ImageSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageSize.h"; path = "SGQRCode/Category/UIImage+ImageSize.h"; sourceTree = "<group>"; };
 		CB228BE61FD98B6A00947E1F /* UIImage+ImageSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageSize.m"; path = "SGQRCode/Category/UIImage+ImageSize.m"; sourceTree = "<group>"; };
 		CB228BE81FD994C400947E1F /* RCTQrCodeScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTQrCodeScannerView.h; sourceTree = "<group>"; };
-		CB228BE91FD994D700947E1F /* RCTQrCodeScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTQrCodeScannerView.m; path = ../RCTQrCodeScannerView.m; sourceTree = "<group>"; };
+		CB228BEB1FDA427000947E1F /* RCTQrCodeScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTQrCodeScannerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 				B3E7B5881CC2AC0600A0062D /* RCTQrCodeScanner.h */,
 				B3E7B5891CC2AC0600A0062D /* RCTQrCodeScanner.m */,
 				CB228BE81FD994C400947E1F /* RCTQrCodeScannerView.h */,
-				CB228BE91FD994D700947E1F /* RCTQrCodeScannerView.m */,
+				CB228BEB1FDA427000947E1F /* RCTQrCodeScannerView.m */,
 				CB228BDD1FD98B3700947E1F /* SGQRCode.h */,
 				CB228BD51FD98B3500947E1F /* SGQRCodeAlbumManager.h */,
 				CB228BD81FD98B3600947E1F /* SGQRCodeAlbumManager.m */,
@@ -156,7 +156,7 @@
 				CB228BE11FD98B3700947E1F /* SGQRCodeAlbumManager.m in Sources */,
 				CB228BE71FD98B6A00947E1F /* UIImage+ImageSize.m in Sources */,
 				CB228BE31FD98B3700947E1F /* SGQRCodeGenerateManager.m in Sources */,
-				CB228BEA1FD994D700947E1F /* RCTQrCodeScannerView.m in Sources */,
+				CB228BEC1FDA427000947E1F /* RCTQrCodeScannerView.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RCTQrCodeScanner.m in Sources */,
 				CB228BE01FD98B3700947E1F /* SGQRCodeScanningView.m in Sources */,
 			);
