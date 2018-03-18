@@ -6,6 +6,7 @@ import {
   View,
   processColor,
   StyleSheet,
+  DeviceEventEmitter,
 } from 'react-native';
 
 const SCANNER_REF = 'scanner';
@@ -73,18 +74,37 @@ export default class QrCodeScanner extends Component {
     onError: PropTypes.func,
   };
 
+  componentWillMount() {
+    DeviceEventEmitter.addListener(
+      'wisqoScanQrCodeSuccess',
+      this._onSuccess);
+    DeviceEventEmitter.addListener(
+      'wisqoScanQrCodeError',
+      this._onError);
+  }
+
   _onSuccess = (event: Event) => {
     if (!this.props.onSuccess) {
       return;
     }
-    this.props.onSuccess(event.nativeEvent.result);
+
+    if (event.nativeEvent) {
+      this.props.onSuccess(event.nativeEvent.result);
+    } else {
+      this.props.onSuccess(event.result);
+    }
   }
 
   _onError = (event: Event) => {
     if (!this.props.onError) {
       return;
     }
-    this.props.onError(event.nativeEvent.error);
+
+    if (event.nativeEvent) {
+      this.props.onError(event.nativeEvent.error);
+    } else {
+      this.props.onSuccess(event.error);
+    }
   }
 
   render() {

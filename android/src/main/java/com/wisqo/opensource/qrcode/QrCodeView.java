@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
@@ -335,12 +336,13 @@ public abstract class QrCodeView extends RelativeLayout
       WritableMap event = Arguments.createMap();
       event.putString("result", result);
       ReactContext reactContext = (ReactContext)getContext();
-      reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-          getId(),
-          "success",
-          event);
-
-      System.out.println("System now received message:" + result);
+      reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+          .emit("wisqoScanQrCodeSuccess", event);
+      // Not available now since the React-Native is upgraded
+      // reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+      //     getId(),
+      //     "success",
+      //     event);
     }
 
     @Override
@@ -348,10 +350,8 @@ public abstract class QrCodeView extends RelativeLayout
       WritableMap event = Arguments.createMap();
       event.putString("error", "Failed to open camera");
       ReactContext reactContext = (ReactContext)getContext();
-      reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-          getId(),
-          "error",
-          event);
+      reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+          .emit("wisqoScanQrCodeError", event);
     }
 
   }
