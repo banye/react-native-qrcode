@@ -82,6 +82,10 @@ export default class QrCodeScanner extends Component {
       'wisqoScanQrCodeError',
       this._onError);
   }
+  componentWillUnmount () {
+      this.successLintener &&  this.successLintener.remove();
+      this.errorLintener &&  this.errorLintener.remove();
+  }
 
   _onSuccess = (event: Event) => {
     if (!this.props.onSuccess) {
