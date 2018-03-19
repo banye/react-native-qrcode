@@ -75,12 +75,16 @@ export default class QrCodeScanner extends Component {
   };
 
   componentWillMount() {
-    DeviceEventEmitter.addListener(
+      this.successLintener  = DeviceEventEmitter.addListener(
       'wisqoScanQrCodeSuccess',
       this._onSuccess);
-    DeviceEventEmitter.addListener(
+      this.errorLintener = DeviceEventEmitter.addListener(
       'wisqoScanQrCodeError',
       this._onError);
+  }
+  componentWillUnmount () {
+      this.successLintener &&  this.successLintener.remove();
+      this.errorLintener &&  this.errorLintener.remove();
   }
 
   _onSuccess = (event: Event) => {
